@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HiArrowTopRightOnSquare } from 'react-icons/hi2';
 import { SiGoogleanalytics, SiGoogleplay, SiTcs } from 'react-icons/si';
+import { assetUrl } from '../utils/assetUrl';
 
 const certificates = [
   {
@@ -43,8 +44,6 @@ const certificates = [
 ];
 
 export default function Certificates() {
-  const baseUrl = import.meta.env.BASE_URL;
-
   return (
     <div className="mx-auto max-w-7xl space-y-10">
       <div className="max-w-3xl space-y-4">
@@ -96,7 +95,7 @@ export default function Certificates() {
             </div>
 
             <a
-              href={`${baseUrl}${certificate.href.replace(/^\//, '')}`}
+              href={assetUrl(certificate.href)}
               target="_blank"
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/82 transition-colors hover:text-cyan-200"

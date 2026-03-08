@@ -8,6 +8,7 @@ import {
 } from 'react-icons/si';
 import { Typewriter } from 'react-simple-typewriter';
 import { Link } from 'react-scroll';
+import { assetUrl } from '../utils/assetUrl';
 
 const floatingIcons = [
   { Icon: RiReactjsLine, className: 'left-[50%]  top-[50%]    text-cyan-300/75'    },
@@ -34,8 +35,6 @@ const techStack = [
 ];
 
 export default function Hero() {
-  const baseUrl = import.meta.env.BASE_URL;
-
   return (
     <div className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 sm:px-8 lg:px-12">
 
@@ -174,7 +173,7 @@ export default function Hero() {
               <span className="text-base">↗</span>
             </Link>
            <a
-  href={`${baseUrl}resume.pdf`}
+  href={assetUrl('resume.pdf')}
   target="_blank"
   rel="noopener noreferrer"
   className="inline-flex items-center gap-2.5 rounded-full border border-white/14 bg-white/[0.06] px-8 py-3.5 text-[0.9rem] font-semibold text-white backdrop-blur-sm transition-all hover:scale-[1.04] hover:border-cyan-400/40 hover:bg-white/10"

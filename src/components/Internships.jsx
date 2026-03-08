@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBriefcase, FaChartLine, FaDatabase, FaRobot } from 'react-icons/fa';
+import { assetUrl } from '../utils/assetUrl';
 
 const programs = [
   {
@@ -63,8 +64,6 @@ const programs = [
 ];
 
 export default function Internships() {
-  const baseUrl = import.meta.env.BASE_URL;
-
   return (
     <div className="mx-auto max-w-7xl space-y-10">
       <div className="max-w-4xl space-y-4">
@@ -129,7 +128,7 @@ export default function Internships() {
               </div>
 
               <a
-                href={`${baseUrl}${program.href.replace(/^\//, '')}`}
+                href={assetUrl(program.href)}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 inline-flex items-center text-sm font-semibold text-cyan-200 transition-colors hover:text-white"

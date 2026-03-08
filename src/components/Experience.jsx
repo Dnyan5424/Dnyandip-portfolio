@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaDatabase } from 'react-icons/fa';
+import { assetUrl } from '../utils/assetUrl';
 
 const responsibilities = [
   'Converted raw datasets into meaningful formats through normalization and transformation.',
@@ -10,7 +11,7 @@ const responsibilities = [
 ];
 
 export default function Experience() {
-  const certificateHref = `${import.meta.env.BASE_URL}documents/experience/proazure-internship-certificate.pdf`;
+  const certificateHref = assetUrl('documents/experience/proazure-internship-certificate.pdf');
 
   return (
     <div className="mx-auto max-w-6xl space-y-10">
