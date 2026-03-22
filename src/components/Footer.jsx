@@ -13,13 +13,13 @@ export default function Footer() {
             <div>
             <p className="font-space text-2xl font-bold">Dnyandip Katkar</p>
             <p className="mt-2 text-sm text-slate-300/65">
-              Premium developer portfolio built with React, Tailwind, and Framer Motion.
+
             </p>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-5 text-sm text-slate-300/72">
-            {['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'education', 'achievements', 'contact'].map((item) => (
+            {['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'education', 'contact'].map((item) => (
               <Link key={item} to={item} smooth offset={-88} duration={500} className="cursor-pointer capitalize transition-colors hover:text-cyan-200">
                 {item}
               </Link>
@@ -52,10 +52,6 @@ export default function Footer() {
               <FaChevronUp />
             </button>
           </div>
-        </div>
-
-        <div className="mt-8 border-t border-white/8 pt-5 text-sm text-slate-400">
-          © 2026 Dnyandip Katkar
         </div>
       </div>
     </footer>

@@ -13,7 +13,6 @@ const links = [
   'projects',
   'certificates',
   'education',
-  'achievements',
   'contact',
 ];
 
@@ -26,7 +25,6 @@ const mobileLinks = [
   'projects',
   'certificates',
   'education',
-  'achievements',
   'contact',
 ];
 
@@ -39,7 +37,6 @@ const desktopLabels = {
   projects: 'Projects',
   certificates: 'Certificates',
   education: 'Education',
-  achievements: 'Achievements',
   contact: 'Contact',
 };
 

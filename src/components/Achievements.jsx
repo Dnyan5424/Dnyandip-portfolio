@@ -4,14 +4,22 @@ import { FaMedal, FaTrophy } from 'react-icons/fa';
 
 const achievements = [
   {
-    title: 'National Level Hackathon Participant',
-    date: 'March 2025',
+    title: 'Coder\'s 24-Hour Hackathon 2.0',
+    date: 'National Level',
+    detail: 'New Satara College of Engineering & Management',
     Icon: FaTrophy,
   },
   {
-    title: 'Runner Up - TechSpirit Technical Quiz',
-    date: 'March 2025',
+    title: 'CodeMind AI Hackathon',
+    date: 'Hackathon Participation',
+    detail: 'SVERI College of Engineering',
     Icon: FaMedal,
+  },
+  {
+    title: 'Chakravyuh 1.0',
+    date: 'National Level',
+    detail: 'SVERI College of Engineering ',
+    Icon: FaTrophy,
   },
 ];
 
@@ -41,6 +49,7 @@ export default function Achievements() {
             </div>
             <p className="text-xs uppercase tracking-[0.35em] text-slate-400">{item.date}</p>
             <h3 className="mt-4 font-space text-2xl font-bold leading-tight">{item.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-300/72">{item.detail}</p>
           </motion.article>
         ))}
       </div>

@@ -168,23 +168,6 @@ export default function Projects() {
                   )}
                 </ul>
               </div>
-
-              <div className="flex items-center gap-3 pt-2">
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-500 px-4 py-3 text-sm font-semibold text-slate-950 transition-transform hover:scale-[1.02]"
-                >
-                  Live Demo <FaArrowRight size={12} />
-                </a>
-                <a
-                  href="https://github.com/Dnyan5424"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/85 transition-colors hover:border-cyan-300/35 hover:text-cyan-200"
-                >
-                  GitHub <FaGithub size={13} />
-                </a>
-              </div>
             </div>
           </motion.article>
         ))}

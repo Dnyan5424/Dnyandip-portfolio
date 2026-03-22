@@ -12,7 +12,7 @@ const education = [
     school: 'Shree Chandrashekhar Vidyalay, Shreepur',
     degree: '10th Grade',
     period: 'Completed',
-    details: ['Percentage: 93.40%', 'Ranked 1st in class', 'Ideal Student Award'],
+    details: ['Percentage: 93.40%', 'Ranked 1st in School', 'Ideal Student Award'],
   },
 ];
 

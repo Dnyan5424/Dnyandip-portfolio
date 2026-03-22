@@ -97,7 +97,7 @@ export default function Hero() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Dnyandip
+                Dnyan
               </span>
             </motion.h1>
 

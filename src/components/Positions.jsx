@@ -4,7 +4,7 @@ import { FaTasks, FaUsers } from 'react-icons/fa';
 
 const positions = [
   {
-    title: 'Organizer - College Tech Events',
+    title: 'Volunteer - College Tech Events 2025',
     description:
       'Organized Technical Quiz, CodeByte, and Paper Presentation events focused on Web Development, Data Science, Machine Learning and DSA.',
     Icon: FaTasks,

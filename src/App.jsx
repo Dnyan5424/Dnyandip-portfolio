@@ -11,7 +11,6 @@ const About = lazy(() => import('./components/About'));
 const Research = lazy(() => import('./components/Research'));
 const Skills = lazy(() => import('./components/Skills'));
 const Education = lazy(() => import('./components/Education'));
-const Achievements = lazy(() => import('./components/Achievements'));
 const Positions = lazy(() => import('./components/Positions'));
 const Internships = lazy(() => import('./components/Internships'));
 const Certificates = lazy(() => import('./components/Certificates'));
@@ -114,9 +113,6 @@ function App() {
             </section>
             <section id="education" className={sectionClassName}>
               <Education />
-            </section>
-            <section id="achievements" className={sectionClassName}>
-              <Achievements />
             </section>
             <section id="positions" className={sectionClassName}>
               <Positions />
