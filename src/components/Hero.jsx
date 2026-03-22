@@ -187,7 +187,7 @@ export default function Hero() {
             <span className="h-px w-4 bg-slate-700" />
             {[
               { href: 'https://github.com/Dnyan5424', Icon: FaGithub, label: 'GitHub' },
-              { href: 'https://www.linkedin.com/in/dnyandip-katkar-2a4578', Icon: FaLinkedin, label: 'LinkedIn' },
+              { href: 'https://www.linkedin.com/in/dnyandipkatkar', Icon: FaLinkedin, label: 'LinkedIn' },
               { href: 'mailto:Dnyandipkatkar07@gmail.com', Icon: FaEnvelope, label: 'Email' },
             ].map(({ href, Icon, label }) => (
               <a

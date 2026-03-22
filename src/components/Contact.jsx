@@ -11,7 +11,7 @@ const socials = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/dnyandip-katkar-2a4578',
+    href: 'https://www.linkedin.com/in/dnyandipkatkar',
     Icon: FaLinkedin,
     accent: 'from-sky-400/18 via-blue-400/10 to-transparent',
   },
