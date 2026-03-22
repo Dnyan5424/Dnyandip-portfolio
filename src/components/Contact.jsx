@@ -72,7 +72,7 @@ export default function Contact() {
               <div className="relative z-10 flex items-start justify-between gap-5">
                 <div className="flex items-start gap-4">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.3rem] border border-white/12 bg-white/[0.06] text-xl text-cyan-200">
-                    <Icon />
+                    {React.createElement(Icon)}
                   </div>
 
                   <div>

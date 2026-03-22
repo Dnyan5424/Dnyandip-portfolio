@@ -40,7 +40,7 @@ export default function Footer() {
                 aria-label={label}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/78 transition-all hover:-translate-y-1 hover:border-cyan-300/35 hover:text-cyan-200"
               >
-                <Icon />
+                {React.createElement(Icon)}
               </a>
             ))}
 
