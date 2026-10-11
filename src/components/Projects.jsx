@@ -152,13 +152,6 @@ export default function Projects() {
                       <li>Scalable for future integrations</li>
                     </>
                   )}
-                  {project.title === 'AI-Based EV Station Management System' && (
-                    <>
-                      <li>Real-time charging station availability</li>
-                      <li>AI-based demand prediction</li>
-                      <li>Booking and analytics dashboard</li>
-                    </>
-                  )}
                   {project.title === 'Portfolio Website' && (
                     <>
                       <li>Fully responsive design</li>
@@ -166,13 +159,32 @@ export default function Projects() {
                       <li>Projects showcase with GitHub links</li>
                     </>
                   )}
-                  {project.title === 'Car Rental Website' && (
-                    <>
-                      <li>Car browsing and filtering</li>
-                      <li>Booking and reservation management</li>
-                      <li>Admin panel for vehicle management</li>
-                    </>
-                  )}
+                  {project.title === 'Voltnex-AI' && (
+  <>
+    <li>Real-time EV charging station availability</li>
+    <li>AI-based charging demand prediction</li>
+    <li>Interactive station map using Leaflet</li>
+    <li>Grid-to-EV energy exchange optimization</li>
+  </>
+)}
+
+{project.title === 'FoodGuard — A3S' && (
+  <>
+    <li>AI-based food adulteration detection</li>
+    <li>Image analysis using MobileNetV3Small</li>
+    <li>Multi-evidence screening system</li>
+    <li>FastAPI backend with React dashboard</li>
+  </>
+)}
+
+{project.title === 'BhuRakshak' && (
+  <>
+    <li>Satellite-based land and crop monitoring</li>
+    <li>NDVI analysis for vegetation health</li>
+    <li>Environmental change detection using GIS</li>
+    <li>Remote assessment using Sentinel and Landsat data</li>
+  </>
+)}
                 </ul>
               </div>
             </div>
