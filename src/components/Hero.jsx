@@ -167,7 +167,7 @@ export default function Hero() {
               <span className="text-base" aria-hidden="true">↗</span>
             </Link>
             <a
-              href={assetUrl('resume.pdf')}
+              href={assetUrl('Resume.pdf')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 rounded-full border border-white/14 bg-white/[0.06] px-8 py-3.5 text-[0.9rem] font-semibold text-white backdrop-blur-sm transition-all hover:scale-[1.04] hover:border-cyan-400/40 hover:bg-white/10"
