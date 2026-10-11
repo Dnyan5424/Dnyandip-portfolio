@@ -27,13 +27,6 @@ const projects = [
     accent: 'from-violet-500/35 via-fuchsia-500/25 to-cyan-400/25',
   },
   {
-    title: 'AI-Based EV Station Management System',
-    type: 'Platform',
-    description: 'Developed a smart web application for managing Electric Vehicle charging stations with AI-based monitoring and optimization.',
-    stack: ['React', 'Node.js', 'MongoDB', 'Python AI', 'REST APIs'],
-    accent: 'from-emerald-400/30 via-cyan-400/28 to-sky-400/25',
-  },
-  {
     title: 'Portfolio Website',
     type: 'Web',
     description: 'Designed and developed a personal portfolio website to showcase projects, skills, and professional experience.',
@@ -41,12 +34,26 @@ const projects = [
     accent: 'from-amber-300/24 via-fuchsia-400/24 to-sky-400/24',
   },
   {
-    title: 'Car Rental Website',
-    type: 'Web',
-    description: 'Built a web application that allows users to browse, book, and manage car rentals online.',
-    stack: ['HTML', 'CSS', 'JavaScript', 'MongoDB / SQL'],
-    accent: 'from-cyan-300/24 via-blue-400/24 to-fuchsia-400/24',
-  },
+  title: 'Voltnex-AI',
+  type: 'Platform',
+  description: 'Developed a coordinated hybrid architecture for reliable grid and EV energy exchange using AI-based monitoring, demand prediction, and charging-station management.',
+  stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Leaflet', 'Python', 'FastAPI'],
+  accent: 'from-emerald-400/30 via-cyan-400/28 to-sky-400/25',
+},
+{
+  title: 'FoodGuard — A3S',
+  type: 'AI',
+  description: 'Built an AI-based food adulteration screening system that analyzes food images and provides multi-evidence adulteration detection using deep learning.',
+  stack: ['Python', 'TensorFlow', 'MobileNetV3Small', 'FastAPI', 'React', 'MongoDB'],
+  accent: 'from-rose-400/30 via-orange-300/25 to-amber-300/25',
+},
+{
+  title: 'BhuRakshak',
+  type: 'AI',
+  description: 'Developed an AI-networked environmental tracking and remote assessment platform using GIS, satellite imagery, and NDVI-based land and crop analysis.',
+  stack: ['Python', 'GIS', 'Google Earth Engine', 'Sentinel-1/2', 'Landsat', 'NDVI', 'MERN Stack'],
+  accent: 'from-lime-400/28 via-emerald-400/25 to-teal-300/25',
+},
 ];
 
 export default function Projects() {

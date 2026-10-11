@@ -30,7 +30,7 @@ const certificates = [
     platform: 'Google',
     credentialId: '153195920',
     description:
-      'Built practical knowledge of analytics reporting, traffic analysis, and interpreting user behavior data.',
+      'Developed practical knowledge of analytics reporting, website traffic analysis, and interpreting user behavior data.',
     skills: [
       'Data Analysis',
       'Business Analytics',
@@ -47,7 +47,7 @@ const certificates = [
     validUntil: 'September 2028',
     credentialId: '161333853',
     description:
-      'Learned app publishing, optimization, and performance practices for products on the Google Play ecosystem.',
+      'Learned app publishing, optimization, and performance practices for products in the Google Play ecosystem.',
     skills: [
       'Google Play Store Optimization',
       'App Publishing',
@@ -60,7 +60,6 @@ const certificates = [
     title: 'Full Stack Web Development',
     platform: 'Udemy',
     date: '2025',
-    credentialId: 'Udemy Certificate',
     description:
       'Covered front-end fundamentals and core web development concepts used to build responsive websites.',
     skills: ['HTML', 'CSS', 'JavaScript', 'Web Development'],
@@ -88,7 +87,6 @@ const certificates = [
       'Earth Observations and Numerical Model Applications for Tropical Cyclone Monitoring and Forecasting',
     platform: 'Indian Institute of Remote Sensing (IIRS), ISRO',
     date: 'July 2026',
-    credentialId: '2026234975123',
     description:
       'Participated in an online workshop on Earth observations and numerical model applications for tropical cyclone monitoring and forecasting.',
     skills: [
@@ -100,11 +98,68 @@ const certificates = [
     Icon: HiArrowTopRightOnSquare,
     href: '/documents/certificates/cyclone-monitoring-forecasting.pdf',
   },
+
+  // Microsoft Learn achievements
+  {
+    title: 'Describe Azure Compute Services',
+    platform: 'Microsoft Learn',
+    date: 'September 2026',
+    description:
+      'Completed a Microsoft Learn module covering Azure compute services and cloud computing capabilities.',
+    skills: ['Microsoft Azure', 'Cloud Computing', 'Compute Services'],
+    Icon: HiArrowTopRightOnSquare,
+    href: '/documents/achievements/microsoft-learn-achievements.pdf',
+  },
+  {
+    title: 'Build Your First ASP.NET Core Web App',
+    platform: 'Microsoft Learn',
+    date: 'September 2026',
+    description:
+      'Completed a learning module introducing the development of web applications using ASP.NET Core.',
+    skills: ['ASP.NET Core', 'C#', 'Web Development'],
+    Icon: HiArrowTopRightOnSquare,
+    href: '/documents/achievements/microsoft-learn-achievements-1.pdf',
+  },
+  {
+    title: 'Write Your First C# Code',
+    platform: 'Microsoft Learn',
+    date: 'September 2026',
+    description:
+      'Practiced fundamental C# programming concepts and writing basic code.',
+    skills: ['C#', 'Programming Fundamentals', 'Problem Solving'],
+    Icon: HiArrowTopRightOnSquare,
+    href: '/documents/achievements/microsoft-learn-achievements-2.pdf',
+  },
+  {
+    title: 'Get Started with Classes and Objects in C#',
+    platform: 'Microsoft Learn',
+    date: 'September 2026',
+    description:
+      'Explored object-oriented programming fundamentals using classes and objects in C#.',
+    skills: ['C#', 'Object-Oriented Programming', 'Classes', 'Objects'],
+    Icon: HiArrowTopRightOnSquare,
+    href: '/documents/achievements/microsoft-learn-achievements-3.pdf',
+  },
+  {
+    title: 'Introduction to Prompt Engineering with GitHub Copilot',
+    platform: 'Microsoft Learn',
+    date: 'September 2026',
+    description:
+      'Explored prompt engineering and the use of GitHub Copilot to assist software development.',
+    skills: [
+      'Prompt Engineering',
+      'GitHub Copilot',
+      'AI-Assisted Development',
+    ],
+    Icon: HiArrowTopRightOnSquare,
+    href: '/documents/achievements/microsoft-learn-achievements-4.pdf',
+  },
 ];
 
 export default function Certificates() {
   return (
     <div className="mx-auto max-w-7xl space-y-10">
+      {/* Section heading */}
       <div className="max-w-3xl space-y-4">
         <p className="font-space text-xs font-bold uppercase tracking-[0.5em] text-cyan-200/75">
           Certificates
@@ -114,8 +169,15 @@ export default function Certificates() {
           Certifications that strengthen industry readiness, analytics, and
           product understanding.
         </h2>
+
+        <p className="text-sm leading-7 text-slate-400">
+          A collection of professional certifications and learning
+          achievements across software development, artificial intelligence,
+          cloud computing, analytics, and emerging technologies.
+        </p>
       </div>
 
+      {/* Certificate cards */}
       <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
         {certificates.map((certificate, index) => {
           const CertificateIcon =
@@ -127,44 +189,55 @@ export default function Certificates() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.06 }}
+              transition={{
+                duration: 0.5,
+                delay: (index % 3) * 0.06,
+              }}
               whileHover={{ y: -6 }}
-              className="glass-panel section-shell rounded-[1.8rem] p-6"
+              className="glass-panel section-shell flex flex-col rounded-[1.8rem] p-6"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300/20 to-fuchsia-500/20 text-cyan-200">
+              {/* Icon */}
+              <div className="mb-6 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300/20 to-fuchsia-500/20 text-cyan-200">
                 <CertificateIcon size={24} />
               </div>
 
+              {/* Title */}
               <h3 className="font-space text-xl font-bold leading-tight">
                 {certificate.title}
               </h3>
 
+              {/* Issuing platform */}
               <p className="mt-3 text-sm font-medium text-cyan-200/78">
                 {certificate.platform}
               </p>
 
+              {/* Issue date */}
               {certificate.date && (
                 <p className="mt-2 text-xs text-slate-400">
                   Issued: {certificate.date}
                 </p>
               )}
 
+              {/* Expiry date */}
               {certificate.validUntil && (
                 <p className="mt-2 text-xs text-slate-400">
                   Valid until: {certificate.validUntil}
                 </p>
               )}
 
+              {/* Credential ID */}
               {certificate.credentialId && (
                 <p className="mt-2 break-words text-xs text-slate-500">
                   Credential ID: {certificate.credentialId}
                 </p>
               )}
 
+              {/* Description */}
               <p className="mt-5 text-sm leading-7 text-slate-300/80">
                 {certificate.description}
               </p>
 
+              {/* Skills */}
               <div className="mt-5">
                 <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
                   Skills Learned
@@ -182,15 +255,19 @@ export default function Certificates() {
                 </div>
               </div>
 
-              <a
-                href={assetUrl(certificate.href)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-cyan-200"
-              >
-                View certificate
-                <HiArrowTopRightOnSquare size={15} />
-              </a>
+              {/* View certificate link */}
+              <div className="mt-auto pt-8">
+                <a
+                  href={assetUrl(certificate.href)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${certificate.title} certificate`}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition-colors hover:text-cyan-200"
+                >
+                  View certificate
+                  <HiArrowTopRightOnSquare size={15} />
+                </a>
+              </div>
             </motion.article>
           );
         })}
