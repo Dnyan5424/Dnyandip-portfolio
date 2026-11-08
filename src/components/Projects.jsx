@@ -1,196 +1,172 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaArrowRight, FaGithub } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaGithub, FaExternalLinkAlt, FaCheck } from 'react-icons/fa';
+import { projectsData } from '../data/content';
 
-const filters = ['All', 'AI', 'Web', 'Platform'];
-
-const projects = [
-  {
-    title: 'AI Code Reviewer',
-    type: 'AI',
-    description: 'Built an AI-powered code review tool that analyzes source code and provides suggestions for improving code quality, readability, and performance.',
-    stack: ['Python', 'OpenAI API', 'JavaScript', 'HTML', 'CSS'],
-    accent: 'from-fuchsia-500/40 via-sky-400/30 to-cyan-300/25',
-  },
-  {
-    title: 'AI Expense Tracker',
-    type: 'AI',
-    description: 'Developed an intelligent expense tracking system that categorizes user expenses and provides insights into spending habits.',
-    stack: ['Python', 'SQL / MongoDB', 'React', 'Charts'],
-    accent: 'from-cyan-400/35 via-sky-500/30 to-indigo-500/25',
-  },
-  {
-    title: 'AI Chatbot',
-    type: 'AI',
-    description: 'Created an AI chatbot capable of answering user queries in real time using natural language processing techniques.',
-    stack: ['Python', 'OpenAI API', 'JavaScript', 'HTML', 'CSS'],
-    accent: 'from-violet-500/35 via-fuchsia-500/25 to-cyan-400/25',
-  },
-  {
-    title: 'Portfolio Website',
-    type: 'Web',
-    description: 'Designed and developed a personal portfolio website to showcase projects, skills, and professional experience.',
-    stack: ['React', 'Tailwind CSS', 'JavaScript'],
-    accent: 'from-amber-300/24 via-fuchsia-400/24 to-sky-400/24',
-  },
-  {
-  title: 'Voltnex-AI',
-  type: 'Platform',
-  description: 'Developed a coordinated hybrid architecture for reliable grid and EV energy exchange using AI-based monitoring, demand prediction, and charging-station management.',
-  stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Leaflet', 'Python', 'FastAPI'],
-  accent: 'from-emerald-400/30 via-cyan-400/28 to-sky-400/25',
-},
-{
-  title: 'FoodGuard — A3S',
-  type: 'AI',
-  description: 'Built an AI-based food adulteration screening system that analyzes food images and provides multi-evidence adulteration detection using deep learning.',
-  stack: ['Python', 'TensorFlow', 'MobileNetV3Small', 'FastAPI', 'React', 'MongoDB'],
-  accent: 'from-rose-400/30 via-orange-300/25 to-amber-300/25',
-},
-{
-  title: 'BhuRakshak',
-  type: 'AI',
-  description: 'Developed an AI-networked environmental tracking and remote assessment platform using GIS, satellite imagery, and NDVI-based land and crop analysis.',
-  stack: ['Python', 'GIS', 'Google Earth Engine', 'Sentinel-1/2', 'Landsat', 'NDVI', 'MERN Stack'],
-  accent: 'from-lime-400/28 via-emerald-400/25 to-teal-300/25',
-},
-];
+const categories = ['All', 'AI', 'Platform', 'Web'];
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('All');
 
-  const visibleProjects = activeFilter === 'All'
-    ? projects
-    : projects.filter((project) => project.type === activeFilter);
+  const filteredProjects = activeCategory === 'All'
+    ? projectsData
+    : projectsData.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-10">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-3xl space-y-4">
-          <p className="font-space text-xs font-bold uppercase tracking-[0.5em] text-cyan-200/75">Projects</p>
-          <h2 className="font-space text-4xl font-bold tracking-[-0.04em] sm:text-5xl">
-            Real projects spanning AI, web development, and smart platform systems.
-          </h2>
+    <section id="projects" className="relative py-28 px-6 sm:px-8 lg:px-12 border-t border-[#e6e3da] bg-[#fbfbfa]">
+      <div className="mx-auto max-w-7xl">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-12 border-b border-[#e6e3da]">
+          <div>
+            <span className="font-mono-code text-xs uppercase tracking-widest text-[#ea4335] font-bold">
+              Selected Work (01)
+            </span>
+            <h2 className="mt-3 font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-950">
+              Case Studies & Systems
+            </h2>
+            <p className="mt-2 text-neutral-600 max-w-xl text-base">
+              Real projects spanning AI models, smart platforms, data pipelines, and responsive web systems.
+            </p>
+          </div>
+
+          {/* Filter Pills */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`rounded-full px-4 py-1.5 font-mono-code text-xs uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
+                  activeCategory === cat
+                    ? 'bg-neutral-950 text-white font-semibold shadow-xs'
+                    : 'border border-neutral-300 bg-white text-neutral-600 hover:border-neutral-900 hover:text-neutral-950'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-              className={`rounded-full px-5 py-3 text-sm font-semibold transition-all ${
-                activeFilter === filter
-                  ? 'bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-500 text-slate-950 shadow-[0_10px_30px_rgba(56,189,248,0.28)]'
-                  : 'border border-white/10 bg-white/5 text-slate-200/75 hover:border-cyan-300/35'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        {/* Selected Work List (Alternating Editorial Compositions) */}
+        <div className="mt-16 space-y-20 sm:space-y-28">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => {
+              const isEven = index % 2 === 0;
+
+              return (
+                <motion.article
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className={`grid gap-10 lg:gap-16 items-center ${
+                    isEven ? 'lg:grid-cols-[1.1fr_0.9fr]' : 'lg:grid-cols-[0.9fr_1.1fr]'
+                  }`}
+                >
+                  {/* Visual / Feature Composition Box */}
+                  <div
+                    className={`relative rounded-3xl border border-neutral-200 bg-white p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow group ${
+                      isEven ? 'lg:order-1' : 'lg:order-2'
+                    }`}
+                  >
+                    {/* Subtle Top Metadata */}
+                    <div className="flex items-center justify-between border-b border-neutral-100 pb-4 mb-6">
+                      <span className="font-mono-code text-xs uppercase tracking-widest text-[#ea4335] font-bold">
+                        {project.type} // {project.year}
+                      </span>
+                      <span className="font-mono-code text-xs text-neutral-400">
+                        0{index + 1}
+                      </span>
+                    </div>
+
+                    {/* Key Highlights Inside the Composition */}
+                    <div>
+                      <h4 className="font-mono-code text-xs uppercase tracking-wider text-neutral-500 mb-4 font-semibold">
+                        Key Architecture & Highlights
+                      </h4>
+                      <ul className="space-y-3">
+                        {project.highlights.map((highlight) => (
+                          <li key={highlight} className="flex items-start gap-3 text-sm text-neutral-700">
+                            <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-50 text-[#ea4335]">
+                              <FaCheck className="text-[9px]" />
+                            </span>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Tech Stack Matrix Inside Card */}
+                    <div className="mt-8 pt-6 border-t border-neutral-100">
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 font-mono-code text-xs text-neutral-700"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Editorial Details & Links */}
+                  <div className={`space-y-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                    <div>
+                      <div className="flex items-center gap-2 font-mono-code text-xs uppercase text-neutral-500 tracking-wider">
+                        <span>Project</span>
+                        <span className="text-neutral-300">/</span>
+                        <span className="text-[#ea4335] font-bold">{project.type}</span>
+                      </div>
+                      <h3 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-base sm:text-lg leading-relaxed text-neutral-600">
+                      {project.description}
+                    </p>
+
+                    {/* Links */}
+                    <div className="flex flex-wrap items-center gap-4 pt-2">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-5 py-2.5 font-display text-sm font-bold text-neutral-900 transition-all hover:border-neutral-900 hover:scale-105 active:scale-95 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                        >
+                          <FaGithub size={15} />
+                          <span>View Code</span>
+                          <span className="text-xs">↗</span>
+                        </a>
+                      )}
+
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-2.5 font-display text-sm font-bold text-white transition-all hover:bg-[#ea4335] hover:scale-105 active:scale-95 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+                        >
+                          <FaExternalLinkAlt size={12} />
+                          <span>Live Site</span>
+                          <span className="text-xs">↗</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
-
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {visibleProjects.map((project, index) => (
-          <motion.article
-            key={project.title}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.18 }}
-            transition={{ duration: 0.55, delay: index * 0.06 }}
-            whileHover={{ y: -10 }}
-            className="glass-panel section-shell group overflow-hidden rounded-[2rem]"
-          >
-            <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.accent}`}>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_28%),linear-gradient(180deg,rgba(15,23,42,0.12),rgba(2,6,23,0.65))]" />
-              <motion.div
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-5 rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03))] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-              />
-              <div className="absolute bottom-5 left-5 rounded-full border border-white/15 bg-slate-950/55 px-4 py-2 text-xs uppercase tracking-[0.3em] text-slate-100/78">
-                {project.type}
-              </div>
-            </div>
-
-            <div className="space-y-5 p-6">
-              <div className="flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span key={item} className="rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-slate-300/72">
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <div>
-                <h3 className="font-space text-2xl font-bold">{project.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300/68">{project.description}</p>
-              </div>
-
-              <div className="rounded-[1.2rem] border border-white/8 bg-white/[0.03] p-4">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">Highlights</p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-300/72">
-                  {project.title === 'AI Code Reviewer' && (
-                    <>
-                      <li>Automated code review using AI</li>
-                      <li>Detects syntax errors and bad coding practices</li>
-                      <li>Suggests optimization improvements</li>
-                    </>
-                  )}
-                  {project.title === 'AI Expense Tracker' && (
-                    <>
-                      <li>Automatic expense categorization using AI</li>
-                      <li>Monthly spending analytics</li>
-                      <li>Budget tracking and alerts</li>
-                    </>
-                  )}
-                  {project.title === 'AI Chatbot' && (
-                    <>
-                      <li>Real-time conversation interface</li>
-                      <li>Context-based responses</li>
-                      <li>Scalable for future integrations</li>
-                    </>
-                  )}
-                  {project.title === 'Portfolio Website' && (
-                    <>
-                      <li>Fully responsive design</li>
-                      <li>Smooth animations and modern UI</li>
-                      <li>Projects showcase with GitHub links</li>
-                    </>
-                  )}
-                  {project.title === 'Voltnex-AI' && (
-  <>
-    <li>Real-time EV charging station availability</li>
-    <li>AI-based charging demand prediction</li>
-    <li>Interactive station map using Leaflet</li>
-    <li>Grid-to-EV energy exchange optimization</li>
-  </>
-)}
-
-{project.title === 'FoodGuard — A3S' && (
-  <>
-    <li>AI-based food adulteration detection</li>
-    <li>Image analysis using MobileNetV3Small</li>
-    <li>Multi-evidence screening system</li>
-    <li>FastAPI backend with React dashboard</li>
-  </>
-)}
-
-{project.title === 'BhuRakshak' && (
-  <>
-    <li>Satellite-based land and crop monitoring</li>
-    <li>NDVI analysis for vegetation health</li>
-    <li>Environmental change detection using GIS</li>
-    <li>Remote assessment using Sentinel and Landsat data</li>
-  </>
-)}
-                </ul>
-              </div>
-            </div>
-          </motion.article>
-        ))}
-      </div>
-    </div>
+    </section>
   );
 }

@@ -1,132 +1,174 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { Link } from 'react-scroll';
 import { portfolioLogo } from '../assets/images';
+import { assetUrl } from '../utils/assetUrl';
 
-const links = [
-  'home',
-  'about',
-  'research',
-  'skills',
-  'experience',
-  'projects',
-  'certificates',
-  'education',
-  'contact',
+const navItems = [
+  { label: 'Work', to: '#projects' },
+  { label: 'Path', to: '#path' },
+  { label: 'About', to: '#about' },
+  { label: 'Skills', to: '#skills' },
+  { label: 'Research', to: '#research' },
+  { label: 'Certificates', to: '#certificates' },
+  { label: 'Contact', to: '#contact' },
 ];
-
-const mobileLinks = [
-  'home',
-  'about',
-  'research',
-  'skills',
-  'experience',
-  'projects',
-  'certificates',
-  'education',
-  'contact',
-];
-
-const desktopLabels = {
-  home: 'Home',
-  about: 'About',
-  research: 'Research',
-  skills: 'Skills',
-  experience: 'Experience',
-  projects: 'Projects',
-  certificates: 'Certificates',
-  education: 'Education',
-  contact: 'Contact',
-};
-
-function NavLink({ label, onClick }) {
-  return (
-    <Link
-      to={label}
-      smooth
-      spy
-      offset={-88}
-      duration={500}
-      activeClass="text-white"
-      className="group relative cursor-pointer px-4 py-2 text-sm font-medium capitalize text-slate-300/75 transition-colors hover:text-white"
-      onClick={onClick}
-    >
-      {desktopLabels[label] ?? label}
-      <span className="absolute inset-x-4 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-500 transition-transform duration-300 group-hover:scale-x-100" />
-    </Link>
-  );
-}
 
 export default function Navbar() {
-  const MotionHeader = motion.header;
-  const MotionDiv = motion.div;
-
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      const sectionIds = ['home', 'projects', 'path', 'about', 'skills', 'research', 'certificates', 'contact'];
+      const scrollPos = window.scrollY + 180;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <MotionHeader
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className="fixed inset-x-0 top-0 z-[90] px-4 py-4 sm:px-6"
-    >
-      <div
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-5 py-3 transition-all duration-300 sm:px-6 ${
-          scrolled
-            ? 'glass-panel border-white/10 bg-slate-950/60 shadow-[0_18px_60px_rgba(15,23,42,0.4)]'
-            : 'border-white/6 bg-white/[0.03]'
-        }`}
-      >
-        <Link to="home" smooth duration={500} className="flex cursor-pointer items-center gap-3">
-          <img src={portfolioLogo} alt="Dnyandip Katkar logo" className="h-11 w-11 rounded-2xl object-cover shadow-[0_0_32px_rgba(56,189,248,0.18)]" />
-          <div>
-            <p className="font-space text-lg font-bold tracking-tight">Dnyandip</p>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-slate-300/55">Developer Portfolio</p>
-          </div>
-        </Link>
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    const element = document.querySelector(targetId);
+    if (element) {
+      const topOffset = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+    }
+  };
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {links.map((label) => (
-            <NavLink key={label} label={label} />
-          ))}
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'border-b border-[#e6e3da] bg-[#f9f8f5]/90 backdrop-blur-md py-3.5 shadow-sm'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
+        {/* Brand */}
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="group flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 rounded-lg"
+        >
+          <img
+            src={portfolioLogo}
+            alt="Dnyandip Katkar"
+            className="h-9 w-9 rounded-full object-cover border border-neutral-300 shadow-sm transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="flex flex-col">
+            <span className="font-display text-sm font-bold tracking-tight text-neutral-950">
+              Dnyandip Katkar
+            </span>
+            <span className="font-mono-code text-[10px] tracking-widest uppercase text-neutral-500">
+              Developer Portfolio
+            </span>
+          </div>
+        </a>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
+          {navItems.map((item) => {
+            const sectionKey = item.to.replace('#', '');
+            const isActive = activeSection === sectionKey;
+            return (
+              <a
+                key={item.label}
+                href={item.to}
+                onClick={(e) => handleNavClick(e, item.to)}
+                className={`px-3 py-1.5 font-mono-code text-xs tracking-wider uppercase transition-colors rounded-md relative ${
+                  isActive
+                    ? 'text-neutral-950 font-bold'
+                    : 'text-neutral-500 hover:text-neutral-950'
+                }`}
+              >
+                {item.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-x-3 -bottom-1 h-0.5 bg-[#ea4335]"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+
+          <span className="mx-1.5 h-3.5 w-px bg-neutral-300" />
+
+          {/* CV Direct Link */}
+          <a
+            href={assetUrl('documents/Resume.pdf')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 inline-flex items-center gap-1 rounded-full border border-neutral-900 bg-neutral-950 px-3.5 py-1 font-mono-code text-xs uppercase tracking-wider text-white transition-all hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
+          >
+            <span>CV</span>
+            <span className="text-[10px]" aria-hidden="true">↗</span>
+          </a>
         </nav>
 
+        {/* Mobile Menu Toggle */}
         <button
           type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-xl text-white lg:hidden"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Close Menu' : 'Open Menu'}
+          className="md:hidden flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-300 text-neutral-700 hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
         >
-          {open ? <HiX /> : <HiMenuAlt3 />}
+          {mobileOpen ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
         </button>
       </div>
 
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {open ? (
-          <MotionDiv
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25 }}
-            className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-white/10 bg-slate-950/80 p-4 shadow-[0_24px_80px_rgba(2,8,23,0.55)] backdrop-blur-2xl lg:hidden"
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden border-b border-[#e6e3da] bg-[#f9f8f5]/98 backdrop-blur-xl px-6 py-6 shadow-xl"
           >
-            <nav className="flex flex-col">
-              {mobileLinks.map((label) => (
-                <NavLink key={label} label={label} onClick={() => setOpen(false)} />
+            <div className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.to}
+                  onClick={(e) => handleNavClick(e, item.to)}
+                  className="py-2 font-display text-lg tracking-wide text-neutral-700 transition-colors hover:text-[#ea4335]"
+                >
+                  {item.label}
+                </a>
               ))}
-            </nav>
-          </MotionDiv>
-        ) : null}
+              <div className="pt-3 border-t border-neutral-200">
+                <a
+                  href={assetUrl('documents/Resume.pdf')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-between rounded-lg bg-neutral-950 px-4 py-3 font-mono-code text-xs uppercase tracking-wider text-white"
+                >
+                  <span>View Resume / CV</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
-    </MotionHeader>
+    </header>
   );
 }

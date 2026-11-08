@@ -2,10 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Cursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [visible, setVisible] = useState(false);
+  const [isPointerDevice, setIsPointerDevice] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  });
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+    const onMediaChange = (e) => setIsPointerDevice(e.matches);
+    mediaQuery.addEventListener('change', onMediaChange);
+
     const move = (event) => {
       setPosition({ x: event.clientX, y: event.clientY });
       setVisible(true);
@@ -17,22 +26,37 @@ export default function Cursor() {
     window.addEventListener('mouseout', leave);
 
     return () => {
+      mediaQuery.removeEventListener('change', onMediaChange);
       window.removeEventListener('mousemove', move);
       window.removeEventListener('mouseout', leave);
     };
   }, []);
 
+  if (!isPointerDevice) return null;
+
   return (
-    <motion.div
-      animate={{
-        x: position.x - 140,
-        y: position.y - 140,
-        opacity: visible ? 1 : 0,
-      }}
-      transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 0.4 }}
-      className="pointer-events-none fixed left-0 top-0 z-[70] hidden h-[280px] 
-      w-[280px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.12)
-      _0%,rgba(59,130,246,0.08)_32%,rgba(168,85,247,0.04)_55%,transparent_72%)] blur-3xl lg:block"
-    />
+    <>
+      {/* Precision center dot */}
+      <motion.div
+        animate={{
+          x: position.x - 3,
+          y: position.y - 3,
+          opacity: visible ? 1 : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.1 }}
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full bg-neutral-900"
+      />
+
+      {/* Subtle outer follow ring */}
+      <motion.div
+        animate={{
+          x: position.x - 18,
+          y: position.y - 18,
+          opacity: visible ? 0.35 : 0,
+        }}
+        transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.2 }}
+        className="pointer-events-none fixed left-0 top-0 z-[99] h-9 w-9 rounded-full border border-neutral-900/50"
+      />
+    </>
   );
 }

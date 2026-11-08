@@ -1,58 +1,108 @@
 import React from 'react';
-import { FaChevronUp, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { FaChevronUp, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { portfolioLogo } from '../assets/images';
+import { personalData } from '../data/content';
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'Work', href: '#projects' },
+    { label: 'Path', href: '#path' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Research', href: '#research' },
+    { label: 'Certificates', href: '#certificates' },
+    { label: 'Contact', href: '#contact' },
+  ];
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const element = document.querySelector(targetId);
+    if (element) {
+      const topOffset = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="relative z-10 px-5 pb-10 pt-8 sm:px-8 lg:px-12">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/8 bg-white/[0.03] px-6 py-8 backdrop-blur-xl sm:px-8">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-4">
-            <img src={portfolioLogo} alt="Dnyandip Katkar logo" className="h-14 w-14 rounded-2xl object-cover" />
-            <div>
-            <p className="font-space text-2xl font-bold">Dnyandip Katkar</p>
-            <p className="mt-2 text-sm text-slate-300/65">
-
+    <footer className="border-t border-[#e6e3da] py-12 px-6 sm:px-8 lg:px-12 bg-[#f4f2ec]">
+      <div className="mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Brand */}
+        <div className="flex items-center gap-3.5">
+          <img
+            src={portfolioLogo}
+            alt="Dnyandip Katkar logo"
+            className="h-9 w-9 rounded-full object-cover border border-neutral-300"
+          />
+          <div>
+            <p className="font-display text-sm font-bold text-neutral-950">
+              {personalData.name}
             </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-5 text-sm text-slate-300/72">
-            {['home', 'about', 'skills', 'experience', 'projects', 'certificates', 'education', 'contact'].map((item) => (
-              <Link key={item} to={item} smooth offset={-88} duration={500} className="cursor-pointer capitalize transition-colors hover:text-cyan-200">
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            {[
-              { href: 'https://github.com/Dnyan5424', Icon: FaGithub, label: 'GitHub' },
-              { href: 'https://www.linkedin.com/in/dnyandipkatkar', Icon: FaLinkedin, label: 'LinkedIn' },
-              { href: 'mailto:Dnyandipkatkar07@gmail.com', Icon: FaEnvelope, label: 'Email' },
-            ].map(({ href, Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noreferrer' : undefined}
-                aria-label={label}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/78 transition-all hover:-translate-y-1 hover:border-cyan-300/35 hover:text-cyan-200"
-              >
-                {React.createElement(Icon)}
-              </a>
-            ))}
-
-            <button
-              type="button"
-              onClick={() => scroll.scrollToTop({ duration: 500, smooth: true })}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-300 via-sky-400 to-fuchsia-500 text-slate-950 transition-transform hover:scale-[1.04]"
-            >
-              <FaChevronUp />
-            </button>
+            <p className="font-mono-code text-[10px] text-neutral-500 uppercase tracking-widest">
+              Computer Engineering Student
+            </p>
           </div>
         </div>
+
+        {/* Links */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 font-mono-code text-xs uppercase text-neutral-600">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="hover:text-neutral-950 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Back to top & Socials */}
+        <div className="flex items-center gap-4">
+          <a
+            href={personalData.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-neutral-600 hover:text-neutral-950 transition-colors"
+          >
+            <FaGithub size={16} />
+          </a>
+          <a
+            href={personalData.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-neutral-600 hover:text-neutral-950 transition-colors"
+          >
+            <FaLinkedin size={16} />
+          </a>
+          <a
+            href={personalData.socials.email}
+            aria-label="Email"
+            className="text-neutral-600 hover:text-neutral-950 transition-colors"
+          >
+            <FaEnvelope size={16} />
+          </a>
+
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            className="ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-950 text-white transition-all hover:bg-[#ea4335] hover:scale-105 active:scale-95 shadow-sm"
+          >
+            <FaChevronUp size={12} />
+          </button>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl mt-8 pt-8 border-t border-neutral-300/60 text-center font-mono-code text-[11px] text-neutral-500">
+        © {new Date().getFullYear()} Dnyandip Katkar. Designed with warm editorial typography & responsive motion.
       </div>
     </footer>
   );

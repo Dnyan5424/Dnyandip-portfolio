@@ -1,5 +1,21 @@
-import portfolioLogoImg from './Dnyan-removebg-preview.png'
-import profilePhoto from './profile-optimized.jpg'
+import portfolioLogoImg from './Dnyan-removebg-preview.png';
+import profilePhoto from './profile.jpeg';
+import pixelProfilePhoto from './pixel-profile.jpeg';
+import screenshotImg from './screenshot.png';
+import gameSkyBgImg from './game-sky-bg.png';
+import gameSlingshotImg from './game-slingshot.png';
+import dypCampusImg from './college-dyp.png';
+import scvCampusImg from './college-scv.png';
+import sveriCampusImg from './college-sveri.png';
+import gameMailboxImg from './game-mailbox.png';
 
-export const portfolioLogo = portfolioLogoImg
-export const profileImage = profilePhoto
+export const portfolioLogo = portfolioLogoImg;
+export const profileImage = profilePhoto;
+export const pixelProfileImage = pixelProfilePhoto;
+export const screenshot = screenshotImg;
+export const gameSkyBg = gameSkyBgImg;
+export const gameSlingshot = gameSlingshotImg;
+export const gameMailbox = gameMailboxImg;
+export const dypCampusImage = dypCampusImg;
+export const scvCampusImage = scvCampusImg;
+export const sveriCampusImage = sveriCampusImg;

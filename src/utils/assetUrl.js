@@ -1,5 +1,11 @@
+// src/utils/assetUrl.js
 export function assetUrl(path) {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('mailto:')) {
+    return path;
+  }
   const normalizedPath = path.replace(/^\/+/, '');
-
-  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${cleanBase}${normalizedPath}`;
 }
