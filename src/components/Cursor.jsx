@@ -44,6 +44,7 @@ export default function Cursor() {
           opacity: visible ? 1 : 0,
         }}
         transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.1 }}
+        data-custom-cursor
         className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full bg-neutral-900"
       />
 
@@ -55,6 +56,7 @@ export default function Cursor() {
           opacity: visible ? 0.35 : 0,
         }}
         transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.2 }}
+        data-custom-cursor
         className="pointer-events-none fixed left-0 top-0 z-[99] h-9 w-9 rounded-full border border-neutral-900/50"
       />
     </>

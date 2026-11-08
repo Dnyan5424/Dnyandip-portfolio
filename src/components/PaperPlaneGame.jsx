@@ -297,9 +297,10 @@ export default function PaperPlaneGame({
 
   const geo = useMemo(() => {
     const small = w < 640;
-    const scale = small
-      ? Math.min(w / SKY_IMAGE.width, h / SKY_IMAGE.height)
-      : Math.max(w / SKY_IMAGE.width, h / SKY_IMAGE.height);
+    // Keep the landscape art as a cropped backdrop on phones, while laying
+    // the playable props across the portrait stage. Fitting the full image
+    // made both targets tiny and clustered near the center.
+    const scale = Math.max(w / SKY_IMAGE.width, h / SKY_IMAGE.height);
     const renderedWidth = SKY_IMAGE.width * scale;
     const renderedHeight = SKY_IMAGE.height * scale;
     const offsetX = (w - renderedWidth) / 2;
@@ -309,28 +310,29 @@ export default function PaperPlaneGame({
       x: offsetX + x * scale,
       y: offsetY + y * scale,
     });
-    const sling = atArtworkPoint(SLING_FORKS);
-    const mail = atArtworkPoint(MAILBOX_TARGET);
-    const forkHalfWidth = SLING_FORKS.halfWidth * scale;
+    const sling = small ? { x: w * 0.17, y: h * 0.73 } : atArtworkPoint(SLING_FORKS);
+    const mail = small ? { x: w * 0.82, y: h * 0.64 } : atArtworkPoint(MAILBOX_TARGET);
+    const imageScale = small ? clamp(w / 850, 0.38, 0.62) : scale;
+    const forkHalfWidth = SLING_FORKS.halfWidth * imageScale;
     return {
       sling,
-      rest: { x: sling.x, y: sling.y + 58 * scale },
+      rest: { x: sling.x, y: sling.y + (small ? 34 : 58) * imageScale },
       mail,
       forkHalfWidth,
-      targetSize: clamp(160 * scale, 48, 180),
-      targetRingSize: clamp(190 * scale, 60, 220),
-      imageScale: scale,
+      targetSize: clamp((small ? 150 : 160) * imageScale, small ? 72 : 48, 180),
+      targetRingSize: clamp((small ? 180 : 190) * imageScale, small ? 88 : 60, 220),
+      imageScale,
       handle: {
-        left: sling.x - Math.max(55, 110 * scale),
-        top: sling.y - 18 * scale,
-        width: Math.max(110, 220 * scale),
-        height: Math.max(150, 270 * scale),
+        left: sling.x - Math.max(small ? 38 : 55, 110 * imageScale),
+        top: sling.y - 18 * imageScale,
+        width: Math.max(small ? 100 : 110, 220 * imageScale),
+        height: Math.max(small ? 140 : 150, 270 * imageScale),
       },
-      maxPull: clamp(w * 0.12, 64, 140),
+      maxPull: clamp(w * (small ? 0.16 : 0.12), 64, 140),
     };
   }, [w, h]);
   const { sling, rest, mail, maxPull, forkHalfWidth, handle, targetSize, targetRingSize, imageScale } = geo;
-  const propHeight = 260 * imageScale;
+  const propHeight = w < 640 ? clamp(w * 0.43, 140, 210) : 260 * imageScale;
   const propScale = propHeight / PROP_IMAGE.height;
   const propWidth = PROP_IMAGE.width * propScale;
 
@@ -525,7 +527,7 @@ export default function PaperPlaneGame({
   const linkedin = contactData.linkedin ?? 'https://www.linkedin.com/in/dnyandipkatkar';
 
   return (
-    <div className="w-full bg-[#f9f8f5] p-3 sm:p-5">
+    <div className="pp-game-shell w-full bg-[#f9f8f5] p-3 sm:p-5">
       <section
         ref={sectionRef}
         onPointerMove={trackPointer}
@@ -550,7 +552,7 @@ export default function PaperPlaneGame({
               src={skyImage}
               alt=""
               className="absolute inset-0 h-full w-full"
-              style={{ objectFit: w < 640 ? 'contain' : 'cover', objectPosition: 'center bottom' }}
+              style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
             />
           ) : (
             <>
@@ -881,7 +883,7 @@ export default function PaperPlaneGame({
         </AnimatePresence>
 
         {/* =========================== DOCK + CREDIT =========================== */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-2 px-3 pb-4 sm:pb-5">
+        <div className="pp-game-dock pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-2 px-3 pb-4 sm:pb-5">
           <div className="pointer-events-auto flex max-w-full items-center gap-1 rounded-full bg-[#2a2a78]/70 p-1.5 text-xs font-semibold text-white ring-1 ring-white/15 backdrop-blur-md sm:text-sm">
             <span className="flex min-w-0 items-center gap-2 truncate rounded-full bg-white px-3 py-1.5 text-[#1a1f3c]">
               <FaEnvelope size={12} className="shrink-0 text-[#e07a50]" />

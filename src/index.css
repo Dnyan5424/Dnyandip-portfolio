@@ -45,6 +45,239 @@ body {
   color: #111111;
 }
 
+/* Vite's starter stylesheet constrained the entire app to a centered 1280px
+   card. The portfolio owns its own section widths and must fill the viewport. */
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keep anchored sections clear of the fixed navigation on every screen. */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  /* The decorative cursor is designed for mouse input and obscures touch
+     interactions if shown on hybrid devices. */
+  .custom-cursor,
+  [data-custom-cursor] {
+    display: none !important;
+  }
+
+  section[id]:not(#certificates):not(#contact) {
+    padding-inline: 1rem;
+    padding-top: clamp(3.75rem, 12vw, 5rem);
+    padding-bottom: clamp(3.75rem, 12vw, 5rem);
+  }
+
+  #home {
+    min-height: auto;
+    padding-top: 7rem;
+    padding-bottom: 3.5rem;
+    gap: 2.5rem;
+  }
+
+  #home h1 {
+    font-size: clamp(2.65rem, 11vw, 4.25rem);
+    overflow-wrap: anywhere;
+  }
+
+  #home .rounded-md.border.border-neutral-300.bg-white {
+    max-width: 46vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #home .rounded-2xl.border.border-neutral-300.bg-white {
+    transform: none !important;
+  }
+
+  #home .rounded-2xl.border.border-neutral-300.bg-white > .flex.items-center.justify-between {
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  #home .rounded-2xl.border.border-neutral-300.bg-white > .flex.items-center.justify-between > a {
+    margin-left: auto;
+  }
+
+  #home .rounded-2xl.border.border-neutral-300.bg-white > .flex.items-center.justify-between > .rounded-md {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+    text-align: center;
+  }
+
+  #projects h2,
+  #path h2,
+  #about h2,
+  #skills h2,
+  #research h2,
+  #certificates h2 {
+    font-size: clamp(2rem, 8.5vw, 3rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  #projects .mt-16.space-y-20,
+  #projects .mt-16.space-y-28 {
+    margin-top: 2.5rem;
+  }
+
+  #projects .rounded-3xl.border.border-neutral-200.bg-white,
+  #research .rounded-3xl.border.border-neutral-200.bg-white {
+    padding: 1.25rem;
+  }
+
+  #path .relative.mt-16 {
+    margin-top: 2.5rem;
+    padding-left: 1.75rem;
+  }
+
+  #path .absolute.left-2\.5 {
+    left: 0.2rem;
+  }
+
+  #path article,
+  #about article {
+    min-width: 0;
+  }
+
+  #about .group.cursor-none {
+    cursor: auto;
+  }
+
+  #certificates .sticky {
+    padding-top: 5.75rem;
+  }
+
+  #certificates .sticky > div:first-of-type > div {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  #certificates .sticky > div:first-of-type > div > div:last-child {
+    gap: 0.4rem;
+  }
+
+  #certificates .sticky > div:first-of-type button {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+  }
+
+  #certificates article {
+    padding: 1.1rem;
+  }
+
+  #certificates article a {
+    font-size: 0.65rem;
+  }
+
+  #contact {
+    padding: 3.75rem 1rem;
+  }
+
+  #contact > div > div:first-child {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  #contact .pp-game-shell {
+    padding: 0.5rem;
+  }
+
+  #contact .pp-game-shell > section {
+    min-height: max(48rem, calc(100svh - 1.5rem));
+    border-radius: 1.5rem;
+  }
+
+  #contact h2 {
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+
+  #contact .pp-game-dock > div:first-child {
+    width: min(100%, 25rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 1rem;
+  }
+
+  #contact .pp-game-dock > div:first-child > span:first-child {
+    flex: 1 1 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  #contact .pp-game-dock {
+    bottom: 0.35rem;
+    gap: 0.35rem;
+    padding-inline: 0.6rem;
+  }
+
+  footer {
+    padding-inline: 1rem;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 420px) {
+  #home .font-mono-code.text-xs.uppercase.tracking-wider {
+    font-size: 0.62rem;
+  }
+
+  #home .rounded-full.border.border-neutral-300.bg-white {
+    font-size: 0.62rem;
+    padding-inline: 0.65rem;
+  }
+
+  #home .inline-flex.items-center.gap-2\.5.rounded-full,
+  #home .inline-flex.items-center.gap-2.rounded-full {
+    padding-inline: 1rem;
+  }
+
+  #certificates .sticky > div:first-of-type > div {
+    flex-wrap: wrap;
+  }
+
+  #certificates .sticky > div:first-of-type > div > div:last-child {
+    margin-left: auto;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

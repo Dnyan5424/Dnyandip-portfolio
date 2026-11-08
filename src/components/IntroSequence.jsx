@@ -8,8 +8,6 @@ const greetings = [
   { text: 'नमस्ते', lang: 'HI', subtitle: 'Ideas without boundaries.' },
   { text: 'Bonjour', lang: 'FR', subtitle: 'Design meets technology.' },
   { text: 'Konnichiwa', lang: 'JP', subtitle: 'Creativity knows no borders.' },
-  { text: 'Здравствуйте', lang: 'RU', subtitle: 'Innovation connects us all.' },
-  { text: 'Hallo', lang: 'DE', subtitle: 'Building a better tomorrow.' },
   { text: 'Ciao', lang: 'IT', subtitle: 'Something meaningful awaits.' },
 ];
 
